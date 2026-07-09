@@ -1,22 +1,103 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-
-struct sanpham{
-    char madonhang[100];
-    char tensanpham[100];
-    int gia;
+#include <stype.h>
+struct tinh{
+    char ten[100];
+    float dientich;
+    float danso;
 };
 
+void chucnang1(struct tinh thanhpho[],int t){
+    struct tinh tmp[100];
+    char option[100];
+    scanf("%s", option);
+    for(int i=0;i<t-1;i++){
+        for(int j=0;j<t-n-1;++){
+            if(thanhpho[j].dientich>thanhpho[j+1].dientich){
+                tmp=thanhpho[j];
+                thanhpho[j]=thanhpho[j+1];
+                thanhpho[j+1]=tmp;
+            }
+        }
+    }
+    if(strcmp(option,"area 0")==0){
+        printf("%s %f",thanhpho[0].ten, thanhpho[0].dientich);
+    }else if(strcmp(option,"area 1")==0){
+        printf("%s %f", thanhpho[t-1].ten,thanhpho[t-1].dientich);
+    }
+    for(int i=0;i<t-1;i++){
+        for(int j=0;j<t-n-1;++){
+            if(thanhpho[j].danso>thanhpho[j+1].danso){
+                tmp=thanhpho[j];
+                thanhpho[j]=thanhpho[j+1];
+                thanhpho[j+1]=tmp;
+            }
+        }
+    }
+    if(strcmp(option,"pop 0")==0){
+        printf("%s %f",thanhpho[0].ten, thanhpho[0].danso);
+    }else if(strcmp(option,"pop 1")==0){
+        printf("%s %f", thanhpho[t-1].ten, thanhpho[t-1].danso);
+    }
+    
+}
+
+void chucnang2(struct tinh thanhpho,int t){
+    int kiemtra1=0;
+    scanf("%f", thanhpho[t].dientich);
+    for(int i=0;i<t;i++){
+        if(thanhpho[i].dientich<thanhpho[t].dientich){
+            printf("%s %f", thanhpho[i].ten, thanhpho[i].dientich);
+            kiemtra1++;
+        }
+    }
+    if(kiemtra1==0){
+        printf("-1");
+    }
+}
+
+int kiemtra(char tinh1[], char tinh2[]){
+    for(int i=0;i<strlen(tinh1);i++){
+        tinh1[i]=tolower(tinh1[i]);
+    }
+    for(int i=0;i<strlen(tinh2);i++){
+        tinh2[i]=tolower(tinh2[i]);
+    }
+    if(strcmp(tinh1,tinh2)==0){
+        return 1;
+    }
+    return 0;
+}
+
+void chucnang3(struct tinh thanhpho,int t){
+    char timten[100];
+    scanf("%s", timten);
+    for(int i=0;i<t;i++){
+        if(kiemtra(thanhpho[i].ten,timten)==1){
+            printf("%s", thanhpho[i].ten);
+        }
+    }
+}
 
 int main() {
-    int n;
-    struct sanpham sp[100];
-    scanf("%d", &n);
-    for(int i=0;i<n;i++){
-        scanf("%s", sp[i].madonhang);
-        scanf(" %[^\n]", sp[i].tensanpham);
-        scanf("%d", &sp[i].gia);
+    int t=0;
+    struct tinh thanhpho[100];
+    while(1){
+        scanf("%s", thanhpho[t].ten);
+        if(thanhpho[t].ten<='3'&&thanhpho[t].ten>='1'){
+            break;
+        }
+        scanf("%f %f", &thanhpho[t].dientich, &thanhpho[t],danso);
+        t++;
+    }
+    
+    if(strcmp(thanhpho[t].ten,"1")==0){
+        chucnang1(thanhpho,t);
+    }else if(strcmp(thanhpho[t].ten,"2")==0){
+        chucnang2(thanhpho,t);
+    }else if(strcmp(thanhpho[t].ten,"3")==0){
+        chucnang3(thanhpho,t); 
     }
     
     
