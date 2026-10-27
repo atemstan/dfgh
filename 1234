@@ -1,25 +1,52 @@
+#include <bits/stdc++.h>
 #include <stdio.h>
+#include <string.h>
+#define max 100
+typedef struct{
+    int data;
+    node* left;
+    node* right;
+    
+}node;
 
+node* makeroot(int data)
+{
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
 
-
-int main() {
-    int arr[1000];
-    int so;
-    int a=0;
-    int solieu[1000];
-    scanf(" %d", &so);
-    for(int i=0;i<so;i++){
-        scanf(" %d", &arr[i]);
+node* search(node*root,int u){
+    node *traverse=root;
+    if(traverse->id==u){
+        return traverse;
     }
-    for(int i=0;i<so;i++){
-        for(int j=0;j<so;j++){
-            for(int k=0;k<so;k++){
-                solieu[k]=a+arr[k];
-                a=a+arr[k];
-            }
-            
+    search(traverse->left,u);
+    search(traverse->right,u);
+}
+
+node addleft(node *root){
+    
+}
+
+int main()
+{
+    int u,v;
+    char func[max]=NULL;
+    while(func!='*'){
+        if(func=='MakeRoot'){
+            scanf(" %d", &u);
+            node* root=makeroot(u);
+        }
+        if(func=='AddLeft'){
+            scanf(" %d", &u);
+            addleft(root,u);
         }
         
+        scanf("%s", func);
     }
-    
+
+
 }
